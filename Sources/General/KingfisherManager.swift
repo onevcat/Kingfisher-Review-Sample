@@ -342,7 +342,19 @@ public class KingfisherManager {
             result in
             handler(currentSource: source, result: result)
         }
-
+    }
+    
+    public func performDownloadIfNecessary(source: Source) {
+        downloadIfNotCached(with: source)
+    }
+    
+    private func downloadIfNotCached(with source: Source) {
+        let cached = cache.isCached(forKey: source.cacheKey)
+        if cached {
+            downloader.downloadImage(with: source.url!, options: [])
+        } else {
+            // Do nothing since already cached.
+        }
     }
     
     private func retrieveImage(
