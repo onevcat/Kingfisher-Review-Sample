@@ -64,6 +64,9 @@ extension NormalLoadingViewController {
             .onSuccess { print($0) }
             .onFailure { err in print("Error: \(err)") }
             .set(to: imageView)
+        
+        // Also ensure download
+        KingfisherManager.shared.performDownloadIfNecessary(source: .network(url))
     }
     
     override func collectionView(
